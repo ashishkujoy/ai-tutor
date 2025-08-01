@@ -5,8 +5,6 @@ import Lesson from '../src/models/lesson.model';
 
 dotenv.config();
 
-
-
 describe('Database', () => {
   let mongoServer: MongoMemoryServer;
 
