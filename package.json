@@ -22,10 +22,15 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jest": "^30.0.5",
+    "mongoose": "^8.17.0",
     "morgan": "^1.10.1",
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
+    "tslib": "^2.8.1",
     "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^10.1.4"
   }
 }
