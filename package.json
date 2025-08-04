@@ -13,6 +13,8 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@langchain/core": "^0.3.66",
+    "@langchain/google-genai": "^0.2.16",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
@@ -23,6 +25,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jest": "^30.0.5",
+    "langchain": "^0.3.30",
     "mongoose": "^8.17.0",
     "morgan": "^1.10.1",
     "supertest": "^7.1.4",
