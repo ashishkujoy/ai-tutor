@@ -11,7 +11,7 @@ export const evaluateController = (tutorLLM: TutorLLM) => async (req: Request, r
     }
 
     const result = await evaluateCode(lessonId, codeSubmission, tutorLLM);
-    res.status(200).json(result);
+    res.status(200).json({ content: result });
   } catch (error: any) {
     console.error('Error in evaluation controller:', error);
     res.status(500).json({ message: error.message || 'Internal server error.' });

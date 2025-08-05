@@ -10,7 +10,7 @@ connectDB();
 
 const app = createApp(
   new TutorLLMImpl(new ChatGoogleGenerativeAI({
-    model: 'gemini-flash-2.5',
+    model: 'gemini-2.5-flash',
     temperature: 0.7,
   }))
 );

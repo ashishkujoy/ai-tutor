@@ -46,14 +46,7 @@ describe('evaluateCode', () => {
     (PromptTemplate.findOne as jest.Mock).mockResolvedValue(mockPromptTemplate);
 
     // Mock LLM response
-    mockLlm.evaluateCode.mockResolvedValue({
-      feedback: 'Good job, but consider edge cases.',
-      suggestions: 'Add input validation.',
-      rawLLMResponse: JSON.stringify({
-        feedback: 'Good job, but consider edge cases.',
-        suggestions: 'Add input validation.',
-      }),
-    });
+    mockLlm.evaluateCode.mockResolvedValue('Good job, but consider edge cases.');
 
     const lessonId = mockLesson._id.toHexString();
     const codeSubmission = 'function add(a, b) { return a + b; }';
@@ -67,14 +60,7 @@ describe('evaluateCode', () => {
       isActive: true,
     });
     expect(mockLlm.evaluateCode).toHaveBeenCalledTimes(1);
-    expect(result).toEqual({
-      feedback: 'Good job, but consider edge cases.',
-      suggestions: 'Add input validation.',
-      rawLLMResponse: JSON.stringify({
-        feedback: 'Good job, but consider edge cases.',
-        suggestions: 'Add input validation.',
-      }),
-    });
+    expect(result).toEqual('Good job, but consider edge cases.')
   });
 
   it('should throw an error if lesson is not found', async () => {

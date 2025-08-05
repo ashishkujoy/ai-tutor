@@ -1,10 +1,10 @@
-import { PromptTemplate as LC_PromptTemplate } from '@langchain/core/prompts';
+import { ChatPromptTemplate } from '@langchain/core/prompts';
 import Lesson from '../models/lesson.model';
 import PromptTemplate from '../models/prompt-template.model';
-import { EvaluationResult, TutorLLM } from './tutor.llm';
+import { TutorLLM } from './tutor.llm';
 
 
-export async function evaluateCode(lessonId: string, codeSubmission: string, tutorLLM: TutorLLM): Promise<EvaluationResult> {
+export async function evaluateCode(lessonId: string, codeSubmission: string, tutorLLM: TutorLLM): Promise<string> {
   const lesson = await Lesson.findById(lessonId);
   if (!lesson) {
     throw new Error('Lesson not found.');
@@ -18,7 +18,7 @@ export async function evaluateCode(lessonId: string, codeSubmission: string, tut
   }, codeSubmission);
 }
 
-async function createPromptTemplate() {
+const createPromptTemplate = async () => {
   const promptTemplateDoc = await PromptTemplate.findOne({
     interactionType: 'CodeReview',
     phase: 'Instructor',
@@ -29,11 +29,9 @@ async function createPromptTemplate() {
     throw new Error('Active Instructor CodeReview prompt template not found.');
   }
 
-  // 3. Construct LLM Prompt using LangChain
-  const lcPromptTemplate = new LC_PromptTemplate({
-    template: promptTemplateDoc.template,
-    inputVariables: ['dailyChallenge', 'solutionCode', 'codeSubmission'],
-  });
-  return lcPromptTemplate;
+  return ChatPromptTemplate.fromMessages([
+    ["system", promptTemplateDoc.template],
+    ["user", "{codeSubmission}"]
+  ])
 }
 
